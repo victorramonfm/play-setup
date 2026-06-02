@@ -46,9 +46,6 @@ public class Match implements Serializable {
     }
 
     public void updatePlayerStats(int score1, int score2, int ptsWin, int ptsDraw, int ptsLoss) {
-        if (this.status == MatchStatus.FINISHED) {
-            throw new IllegalStateException("O resultado desta partida já foi finalizado.");
-        }
         if (score1 < 0 || score2 < 0) {
             throw new IllegalArgumentException("Os placares não podem ser negativos.");
         }

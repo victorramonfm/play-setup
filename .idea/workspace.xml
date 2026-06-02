@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="68ddb072-7435-4ee8-808b-6c5cfb068daa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/data/H2TournamentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/data/TournamentQueries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/presentation/TournamentManagementUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/presentation/TournamentSwingUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/engines/RoundRobinEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/engines/RoundRobinEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/engines/SwissEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/engines/SwissEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play-setup/src/main/java/org/play/presentation/StandingView.java" beforeDir="false" afterPath="$PROJECT_DIR$/play-setup/src/main/java/org/play/presentation/StandingView.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/victor/Dev/play-setup" value="3EaERbkVY97k9ySnI0POlaKCeJG" />
+    </persistenceIdMap>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/play-setup">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3EaERbkVY97k9ySnI0POlaKCeJG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Gradle.play-setup [:org.play.Main.main()].executor": "Run",
+    "Gradle.play-setup [clean compileJava].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/victor/Dev/play-setup",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle clean compileJava" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.play.Main" />
+      <module name="org.play.play-setup.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.play.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="play-setup [clean compileJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/play-setup" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="compileJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.play-setup [clean compileJava]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68ddb072-7435-4ee8-808b-6c5cfb068daa" name="Changes" comment="" />
+      <created>1780408273035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780408273035</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Tournament.java</url>
+          <line>115</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/TournamentStatus.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/play-setup/src/main/java/org/play/domain/models/Tournament.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

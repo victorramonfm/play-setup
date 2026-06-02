@@ -68,6 +68,16 @@ public class Player implements Serializable {
         return encounteredOpponentsIds;
     }
 
+    public void resetStats() {
+        this.points = 0;
+        this.wins = 0;
+        this.draws = 0;
+        this.losses = 0;
+        this.pointsFor = 0;
+        this.pointsAgainst = 0;
+        this.encounteredOpponentsIds.clear();
+    }
+
     public void recordMatchResult(
             int earnedPoints,
             boolean isWin,
@@ -82,8 +92,8 @@ public class Player implements Serializable {
         if (isDraw) this.draws++;
         if (isLoss) this.losses++;
 
-        this.pointsFor = scoreFor;
-        this.pointsAgainst = scoreAgainst;
+        this.pointsFor += scoreFor;
+        this.pointsAgainst += scoreAgainst;
 
         if (opponentId != null) {
             this.encounteredOpponentsIds.add(opponentId);

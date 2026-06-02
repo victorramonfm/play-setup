@@ -102,7 +102,7 @@ public class TournamentService {
             }
 
             if (tournament.getEngine() instanceof RoundRobinEngine) {
-                tournament.advanceTournament(); // Muda para FINISHED
+                tournament.advanceTournament();
             } else {
                 tournament.generateNextRound();
             }

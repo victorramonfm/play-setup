@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="play-setup" external.linked.project.path="$MODULE_DIR$/../../play-setup" external.root.project.path="$MODULE_DIR$/../../play-setup" external.system.id="GRADLE" external.system.module.group="org.play" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_21" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../play-setup">
+      <excludeFolder url="file://$MODULE_DIR$/../../play-setup/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../play-setup/build" />
+    </content>
+    <orderEntry type="jdk" jdkName="corretto-21" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

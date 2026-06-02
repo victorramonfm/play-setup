@@ -10,8 +10,6 @@ public class StandingView {
     public static void render(Tournament tournament) {
         List<Player> sortedList = new ArrayList<>(tournament.getPlayers());
 
-        // Ordena os jogadores para a tabela: Maior pontuação primeiro.
-        // Se empatar em pontos, usa o saldo de "Pontos Feitos (PF)" como critério de desempate
         sortedList.sort((p1, p2) -> {
             int comp = Integer.compare(p2.getPoints(), p1.getPoints());
             if (comp == 0) {

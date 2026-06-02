@@ -1,16 +1,18 @@
 package org.play;
 
-import org.play.data.FileTournamentRepository;
+import org.play.data.H2TournamentRepository;
 import org.play.data.TournamentRepository;
-import org.play.domain.Services.TournamentService;
-import org.play.presentation.TournamentConsoleUI;
+import org.play.presentation.TournamentSwingUI;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        TournamentRepository repository = new FileTournamentRepository();
-        TournamentService service = new TournamentService(repository);
-        TournamentConsoleUI ui = new TournamentConsoleUI(service);
+        TournamentRepository repository = new H2TournamentRepository();
 
-        ui.start();
+        SwingUtilities.invokeLater(() -> {
+            TournamentSwingUI gui = new TournamentSwingUI(repository);
+            gui.setVisible(true);
+        });
     }
 }

@@ -90,7 +90,7 @@ public class TournamentConsoleUI {
 
     private void manageTournamentMenu(String tournamentId) {
         while (true) {
-            Tournament t = service.getTournamentById(tournamentId); // Recarrega o estado atualizado
+            Tournament t = service.getTournamentById(tournamentId);
             System.out.println("\n=== GERENCIAR: " + t.getName().toUpperCase() + " [" + t.getStatus() + "] ===");
             System.out.println("1. Adicionar Competidor");
             System.out.println("2. Ver Participantes Inscritos");
