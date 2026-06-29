@@ -138,7 +138,46 @@ public class TournamentManagementUI extends JFrame {
         }
         try {
             String playerId = "PLY-" + System.currentTimeMillis();
-            Player newPlayer = new Player(playerId, playerName);
+
+            String[] options = {"Jogador Humano", "Bot / Inteligência Artificial"};
+            int choice = JOptionPane.showOptionDialog(
+                    this,
+                    "Selecione o tipo de competidor para '" + playerName + "':",
+                    "Tipo de Jogador",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            );
+
+            Player newPlayer;
+
+            if (choice == 0) {
+                String nickname = JOptionPane.showInputDialog(this, "Digite o Apelido (Nickname) do jogador:", "Configuração do Humano", JOptionPane.PLAIN_MESSAGE);
+                if (nickname == null || nickname.trim().isEmpty()) {
+                    nickname = playerName;
+                }
+                newPlayer = new org.play.domain.models.HumanPlayer(playerId, playerName, nickname);
+
+            } else if (choice == 1) {
+                String[] difficulties = {"Fácil", "Médio", "Difícil"};
+                String difficulty = (String) JOptionPane.showInputDialog(
+                        this,
+                        "Escolha a dificuldade do Bot:",
+                        "Configuração da IA",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        difficulties,
+                        difficulties[0]
+                );
+                if (difficulty == null) difficulty = "Médio";
+                newPlayer = new org.play.domain.models.BotPlayer(playerId, playerName, difficulty);
+
+            } else {
+                return;
+            }
+
             tournament.addPlayer(newPlayer);
             playerFieldName.setText("");
             saveAndRefresh();

@@ -1,0 +1,163 @@
+@startuml "Diagrama de Classes - Play Setup"
+
+skinparam monochrome false
+skinparam shading false
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+skinparam package {
+    BackgroundColor<<Data>> #EAF2F8
+    BackgroundColor<<Domain>> #FADBD8
+    BackgroundColor<<Presentation>> #E8F8F5
+}
+
+class Main {
+    + main(args: String[]): void
+}
+
+package "data" <<Data>> {
+    interface TournamentRepository {
+        + save(tournament: Tournament): void
+        + findById(id: String): Tournament
+        + findAll(): List<Tournament>
+    }
+
+    class FileTournamentRepository {
+        - filePath: String
+        + save(tournament: Tournament): void
+        + findById(id: String): Tournament
+        + findAll(): List<Tournament>
+    }
+    TournamentRepository <|.. FileTournamentRepository
+}
+
+package "domain" <<Domain>> {
+
+    package "models" {
+        abstract class Player {
+            - id: String
+            - name: String
+            + getId(): String
+            + getName(): String
+        }
+
+        class HumanPlayer {
+            - email: String
+        }
+
+        class BotPlayer {
+            - difficulty: String
+        }
+
+        class Match {
+            - id: String
+            - player1: Player
+            - player2: Player
+            - score1: int
+            - score2: int
+            + registerResult(score1: int, score2: int): void
+        }
+
+        enum MatchStatus {
+            PENDING
+            IN_PROGRESS
+            FINISHED
+        }
+
+        class Round {
+            - roundNumber: int
+            - matches: List<Match>
+            + isCompleted(): boolean
+        }
+
+        class Tournament {
+            - id: String
+            - name: String
+            - players: List<Player>
+            - rounds: List<Round>
+            + start(): void
+            + nextRound(): void
+        }
+
+        enum TournamentStatus {
+            SETUP
+            IN_PROGRESS
+            FINISHED
+        }
+
+        Player <|-- HumanPlayer
+        Player <|-- BotPlayer
+        Match *--> "2" Player
+        Match o--> MatchStatus
+        Round *--> "*" Match
+        Tournament *--> "*" Player
+        Tournament *--> "*" Round
+        Tournament o--> TournamentStatus
+    }
+
+    package "engines" {
+        interface TournamentEngine {
+            + generatePairs(players: List<Player>): List<Match>
+        }
+
+        class SwissEngine {
+            + generatePairs(players: List<Player>): List<Match>
+        }
+
+        class RoundRobinEngine {
+            + generatePairs(players: List<Player>): List<Match>
+        }
+
+        TournamentEngine <|.. SwissEngine
+        TournamentEngine <|.. RoundRobinEngine
+    }
+
+    package "exceptions" {
+        class BusinessException {
+            + BusinessException(message: String)
+        }
+        note left of BusinessException : Extends RuntimeException
+    }
+
+    package "service" {
+        class TournamentService {
+            - repository: TournamentRepository
+            - engine: TournamentEngine
+            + createTournament(name: String, type: String): Tournament
+            + addPlayer(tournamentId: String, player: Player): void
+        }
+
+        TournamentService --> TournamentRepository
+        TournamentService --> TournamentEngine
+    }
+}
+
+package "presentation" <<Presentation>> {
+    class StandingView {
+        + render(tournament: Tournament): void
+    }
+
+    class TournamentManagementUI {
+        - service: TournamentService
+        + displayMenu(): void
+    }
+
+    class TournamentSwingUI {
+        - service: TournamentService
+        + initComponentes(): void
+    }
+    note left of TournamentSwingUI : Extends JFrame
+
+    TournamentManagementUI --> TournamentService
+    TournamentSwingUI --> TournamentService
+    TournamentManagementUI ..> StandingView
+    TournamentSwingUI ..> StandingView
+}
+
+Main ..> TournamentManagementUI
+Main ..> TournamentSwingUI
+FileTournamentRepository ..> Tournament : manipula
+
+@enduml

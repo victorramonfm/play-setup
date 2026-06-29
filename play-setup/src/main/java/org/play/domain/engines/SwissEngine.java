@@ -4,6 +4,7 @@ import org.play.domain.models.Match;
 import org.play.domain.models.Player;
 import org.play.domain.models.Round;
 import org.play.domain.models.Tournament;
+import org.play.domain.models.HumanPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class SwissEngine implements TournamentEngine {
         }
 
         if (byePlayerInThisRound != null) {
-            Player dummyBye = new Player(BYE_ID, "BYE (Folga)");
+            Player dummyBye = new HumanPlayer(BYE_ID, "BYE (Folga)", "SISTEMA");
             Match byeMatch = new Match(byePlayerInThisRound, dummyBye);
 
             byeMatch.updatePlayerStats(1, 0, tournament.getPointsWin(), tournament.getPointsDraw(), tournament.getPointsLoss());

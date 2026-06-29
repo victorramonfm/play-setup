@@ -1,80 +1,46 @@
 package org.play.domain.models;
 
+import org.play.domain.exceptions.BusinessException;
 import org.play.domain.engines.TournamentEngine;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tournament implements Serializable {
-    private final String id;
-    private final String name;
-    private final List<Player> players;
-    private final List<Round> rounds;
+    private static final long serialVersionUID = 1L;
 
-    private int pointsWin;
-    private int pointsDraw;
-    private int pointsLoss;
-
+    private String id;
+    private String name;
     private TournamentStatus status;
-    private TournamentEngine engine;
+    private List<Player> players;
+    private List<Round> rounds;
+    private transient TournamentEngine engine;
 
-    public Tournament(String id, String name, int pointsWin, int pointsDraw, int pointsLoss) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome do torneio não pode ser vazio.");
-        }
+    private int ptsWin;
+    private int ptsDraw;
+    private int ptsLoss;
+
+    public Tournament(String id, String name, int ptsWin, int ptsDraw, int ptsLoss) {
         this.id = id;
         this.name = name;
+        this.ptsWin = ptsWin;
+        this.ptsDraw = ptsDraw;
+        this.ptsLoss = ptsLoss;
+        this.status = TournamentStatus.CREATED;
         this.players = new ArrayList<>();
         this.rounds = new ArrayList<>();
-        this.pointsWin = pointsWin;
-        this.pointsDraw = pointsDraw;
-        this.pointsLoss = pointsLoss;
-        this.status = TournamentStatus.CREATED;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public List<Round> getRounds() {
-        return rounds;
-    }
-
-    public int getPointsWin() {
-        return pointsWin;
-    }
-
-    public int getPointsDraw() {
-        return pointsDraw;
-    }
-
-    public int getPointsLoss() {
-        return pointsLoss;
-    }
-
-    public TournamentStatus getStatus() {
-        return status;
-    }
-
-    public TournamentEngine getEngine() {
-        return engine;
-    }
-
-    public void setEngine(TournamentEngine engine) {
-        if (this.status != TournamentStatus.CREATED) {
-            throw new IllegalStateException("Não é possível alterar o modo de torneio após o início.");
-        }
-        this.engine = engine;
-    }
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public TournamentStatus getStatus() { return status; }
+    public List<Player> getPlayers() { return players; }
+    public List<Round> getRounds() { return rounds; }
+    public void setEngine(TournamentEngine engine) { this.engine = engine; }
+    public TournamentEngine getEngine() { return engine; }
+    public int getPointsWin() { return ptsWin; }
+    public int getPointsDraw() { return ptsDraw; }
+    public int getPointsLoss() { return ptsLoss; }
 
     public void addPlayer(Player player) {
         if (this.status != TournamentStatus.CREATED) {
@@ -86,6 +52,36 @@ public class Tournament implements Serializable {
             }
         }
         this.players.add(player);
+    }
+
+    public void startTournament() {
+        if (this.status != TournamentStatus.CREATED) {
+            throw new BusinessException("Transição inválida: Não é possível iniciar um torneio que está no estado " + this.status);
+        }
+        if (this.players.size() < 2) {
+            throw new BusinessException("Regra de Negócio: Não é possível iniciar um torneio com menos de 2 jogadores.");
+        }
+        this.status = TournamentStatus.IN_PROGRESS;
+    }
+
+    public void finishTournament() {
+        if (this.status != TournamentStatus.IN_PROGRESS) {
+            throw new BusinessException("Transição inválida: Apenas torneios EM ANDAMENTO podem ser finalizados.");
+        }
+        if (!rounds.isEmpty() && !rounds.get(rounds.size() - 1).isRoundCompleted()) {
+            throw new BusinessException("Regra de Negócio: Não é possível finalizar o torneio com partidas pendentes na rodada atual.");
+        }
+        this.status = TournamentStatus.FINISHED;
+    }
+
+    public void setStatus(TournamentStatus status) {
+        if (status == TournamentStatus.IN_PROGRESS) {
+            startTournament();
+        } else if (status == TournamentStatus.FINISHED) {
+            finishTournament();
+        } else {
+            this.status = status;
+        }
     }
 
     public void advanceTournament() {
@@ -107,13 +103,11 @@ public class Tournament implements Serializable {
 
     public void generateNextRound() {
         if (this.status != TournamentStatus.IN_PROGRESS) {
-            throw new IllegalStateException("O torneio precisa estar EM ANDAMENTO para gerar rodadas.");
+            throw new BusinessException("Não é possível gerar uma rodada para um torneio no estado: " + this.status);
         }
+
         if (this.engine == null) {
-            throw new IllegalStateException("Nenhum motor de torneio (Engine) foi configurado.");
-        }
-        if (!rounds.isEmpty() && !rounds.get(rounds.size() - 1).isRoundCompleted()) {
-            throw new IllegalStateException("A rodada anterior ainda possui partidas pendentes.");
+            throw new BusinessException("Motor de pareamento (Engine) não configurado para este torneio.");
         }
 
         this.engine.generateRound(this);

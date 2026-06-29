@@ -1,10 +1,12 @@
-package org.play.domain.Services;
+package org.play.domain.services;
 
 import org.play.data.TournamentRepository;
 import org.play.domain.engines.RoundRobinEngine;
 import org.play.domain.engines.SwissEngine;
 import org.play.domain.exceptions.BusinessException;
 import org.play.domain.models.Player;
+import org.play.domain.models.HumanPlayer;
+import org.play.domain.models.BotPlayer;
 import org.play.domain.models.Tournament;
 import org.play.domain.models.TournamentStatus;
 
@@ -36,6 +38,10 @@ public class TournamentService {
     }
 
     public void registerPlayerInTournament(String tournamentId, String playerName) {
+        registerPlayerInTournament(tournamentId, playerName, "HUMAN", playerName);
+    }
+
+    public void registerPlayerInTournament(String tournamentId, String playerName, String playerType, String extraParam) {
         Tournament tournament = repository.findById(tournamentId);
 
         if (tournament == null) {
@@ -43,7 +49,13 @@ public class TournamentService {
         }
 
         String playerId = UUID.randomUUID().toString().substring(0, 5);
-        Player player = new Player(playerId, playerName);
+        Player player;
+
+        if (playerType.equalsIgnoreCase("BOT")) {
+            player = new BotPlayer(playerId, playerName, extraParam);
+        } else {
+            player = new HumanPlayer(playerId, playerName, extraParam);
+        }
 
         try {
             tournament.addPlayer(player);
@@ -60,10 +72,10 @@ public class TournamentService {
         }
 
         try {
-            tournament.advanceTournament();
+            tournament.startTournament();
             tournament.generateNextRound();
             repository.save(tournament);
-        } catch (IllegalStateException e) {
+        } catch (Exception e) {
             throw new BusinessException(e.getMessage());
         }
     }
@@ -102,7 +114,7 @@ public class TournamentService {
             }
 
             if (tournament.getEngine() instanceof RoundRobinEngine) {
-                tournament.advanceTournament();
+                tournament.finishTournament();
             } else {
                 tournament.generateNextRound();
             }
